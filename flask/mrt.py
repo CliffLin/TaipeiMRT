@@ -110,10 +110,8 @@ class MRTStation():
 		if name==Id:
 			return
 		if name != "":
-			for i in self.station:
-				if i["name"] == name :
-					Id = i["id"]
-					break
+		    temp = (i for i in self.station if i['name'].decode('utf8')==unicode(name)).next()
+		Id = temp['id']
 		s = requests.Session()
 		headers = {'content-type':'text/xml','SOAPAcrion':'http://tempuri.org/GetNextTrain2'}
 		content = """<?xml version='1.0' encoding='UTF-8'?>
