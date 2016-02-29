@@ -7,6 +7,7 @@ from flask import Response
 from mrt import *
 import json
 import re
+import os
 app = Flask(__name__)
 M = MRTStation()
 @app.route('/')
@@ -24,4 +25,5 @@ def getTrainTime(station):
     return Response(json.dumps(["Error"]),mimetype='application/json')
 
 if __name__ == '__main__':
-    app.run()
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
